@@ -7,19 +7,25 @@ import Loading from "./Loading";
 export default class FeaturedRooms extends Component {
   static contextType = RoomContext;
   render() {
-    console.log("context", this.context.rooms);
-    let { loading, featuredRooms, rooms } = this.context;
-
-    console.log("rooms", rooms);
+    console.log(this.context);
+    let { loading, featuredRooms: rooms } = this.context;
 
     rooms = rooms.map(room => {
       return <Room key={room.id} room={room} />;
     });
+
+    if (rooms.length === 0) {
+      return (
+        <div className="empty-search">
+          <h3>There are currently no featured rooms </h3>
+        </div>
+      );
+    }
     return (
       <section className="featured-rooms">
         <Title title="featured rooms" />{" "}
         <div className="featured-rooms-center">
-          {loading ? <Loading /> : <Loading />}
+          {loading ? <Loading /> : rooms}
         </div>{" "}
       </section>
     );

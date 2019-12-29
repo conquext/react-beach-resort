@@ -29,10 +29,22 @@ export default class RoomProvider extends Component {
         // order: "sys.createdAt"
         order: "fields.price"
       });
-      return response.items;
-    } catch (err) {
-      console.log(err);
-    }
+      let rooms = this.formatData(response.items);
+
+      let featuredRooms = rooms.filter(room => room.feature === true);
+      let maxPrice = Math.max(...rooms.map(item => item.price));
+      let maxSize = Math.max(...rooms.map(item => item.size));
+
+      this.setState({
+        rooms,
+        featuredRooms,
+        sortedRooms: rooms,
+        loading: false,
+        price: maxPrice,
+        maxPrice,
+        maxSize
+      });
+    } catch (err) {}
   };
 
   getRoom = slug => {
@@ -91,11 +103,13 @@ export default class RoomProvider extends Component {
     );
 
     // filter by breakfast
-    tempRooms = tempRooms.filter(room => room.breakfast === true);
-
+    if (breakfast) {
+      tempRooms = tempRooms.filter(room => room.breakfast === true);
+    }
     // filter by pets
-    tempRooms = tempRooms.filter(room => room.pets <= true);
-
+    if (pets) {
+      tempRooms = tempRooms.filter(room => room.pets <= true);
+    }
     // change state
     this.setState({
       sortedRooms: tempRooms
@@ -103,22 +117,25 @@ export default class RoomProvider extends Component {
   };
 
   componentDidMount() {
-    let rooms =
-      process.env.NODE_ENV === "production"
-        ? this.formatData(this.getData())
-        : this.formatData(items);
-    let featuredRooms = rooms.filter(room => room.feature === true);
-    let maxPrice = Math.max(...rooms.map(item => item.price));
-    let maxSize = Math.max(...rooms.map(item => item.size));
+    try {
+      if (process.env.NODE_ENV !== "production") {
+        let rooms = this.formatData(items);
 
-    this.setState({
-      rooms,
-      featuredRooms,
-      sortedRooms: rooms,
-      loading: false,
-      maxPrice: maxPrice,
-      maxSize: maxSize
-    });
+        let featuredRooms = rooms.filter(room => room.feature === true);
+        let maxPrice = Math.max(...rooms.map(item => item.price));
+        let maxSize = Math.max(...rooms.map(item => item.size));
+
+        this.setState({
+          rooms,
+          featuredRooms,
+          sortedRooms: rooms,
+          loading: false,
+          price: maxPrice,
+          maxPrice,
+          maxSize
+        });
+      } else this.getData();
+    } catch (error) {}
   }
 
   formatData = items => {

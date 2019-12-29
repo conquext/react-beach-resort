@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { RoomContext } from "../context";
 import Title from "../components/Title";
-import Room from "./Room";
 
 const getUnique = (items, value) => {
   return [...new Set(items.map(item => item[value]))];
@@ -40,7 +39,7 @@ export default function RoomsFilter({ rooms }) {
   people = people.map((item, index) => {
     return (
       <option key={index} value={item}>
-        {index}
+        {item}
       </option>
     );
   });
@@ -48,9 +47,8 @@ export default function RoomsFilter({ rooms }) {
   return (
     <section className="filter-container">
       <Title title="search rooms" />
-
-      {/* types */}
-      <form className="filter-form">
+      <form action="" className="filter-form">
+        {/* select room type */}
         <div className="form-group">
           <label htmlFor="type">room type</label>
           <select
@@ -63,11 +61,10 @@ export default function RoomsFilter({ rooms }) {
             {types}
           </select>
         </div>
-        {/* end types */}
-
+        {/* end of select type */}
         {/* guests */}
         <div className="form-group">
-          <label htmlFor="capacity">Guests</label>
+          <label htmlFor="capacity">guests</label>
           <select
             name="capacity"
             id="capacity"
@@ -78,8 +75,7 @@ export default function RoomsFilter({ rooms }) {
             {people}
           </select>
         </div>
-        {/* end guests */}
-
+        {/* end of guests */}
         {/* room price */}
         <div className="form-group">
           <label htmlFor="price">room price ${price}</label>
@@ -95,8 +91,7 @@ export default function RoomsFilter({ rooms }) {
           />
         </div>
         {/* end of room price */}
-
-        {/* room price */}
+        {/* size */}
         <div className="form-group">
           <label htmlFor="size">room size</label>
           <div className="size-inputs">
@@ -118,8 +113,7 @@ export default function RoomsFilter({ rooms }) {
             />
           </div>
         </div>
-        {/* end room price */}
-
+        {/* end of size */}
         {/* extras */}
         <div className="form-group">
           <div className="single-extra">
@@ -132,6 +126,7 @@ export default function RoomsFilter({ rooms }) {
             />
             <label htmlFor="breakfast">breakfast</label>
           </div>
+
           <div className="single-extra">
             <input
               type="checkbox"

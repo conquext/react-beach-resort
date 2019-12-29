@@ -1,12 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Hero from "../components/Hero";
 import Banner from "../components/Banner";
 import defaultBcg from "../images/room-1.jpeg";
 import { RoomContext } from "../context";
 import StyledHero from "../components/StyledHero";
 
-export default class Room {
+export default class Room extends Component {
   state = {
     slug: this.props.match.params.slug,
     defaultBcg
@@ -74,12 +73,12 @@ export default class Room {
           </div>
         </section>
         <section className="room-extras">
-            <h6>extras</h6>
-            <ul className="extras">
-                {extras.map((item, index) => {
-                    return <li key={index}>- {item} </li>
-                })}
-            </ul>
+          <h6>extras</h6>
+          <ul className="extras">
+            {extras.map((item, index) => {
+              return <li key={index}>- {item} </li>;
+            })}
+          </ul>
         </section>
       </>
     );

@@ -220,6 +220,7 @@ h6 {
   text-transform: capitalize;
   margin-bottom: 1rem;
 }
+/*полоса под заголовком*/
 .section-title div {
   width: 5rem;
   height: 5px;
@@ -244,15 +245,20 @@ h6 {
   grid-row-gap: 2rem;
   grid-column-gap: 50px;
 }
+/*Настройка блока с иконками*/
+/*иконки*/
 .service span {
   display: inline-block;
   color: var(--primaryColor);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
 }
+/*заголовок*/
 .services h6 {
   letter-spacing: var(--mainSpacing);
+  text-transform: capitalize;
 }
+/*текст*/
 .services p {
   width: 80%;
   margin: 0 auto;
@@ -510,10 +516,4 @@ h6 {
     max-width: 1170px;
   }
 }
-/* end of rooms filter*/
-/* 
-input[type="range" i] {
-  color: red;
-  background: blue;
-  border: 2px solid green;
-} */
+/* end of rooms fitler*/

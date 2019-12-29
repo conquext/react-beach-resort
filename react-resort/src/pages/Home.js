@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import Banner from "../components/Banner";
-// import Rooms from "../pages/Rooms";
 import Services from "../components/Services";
 import FeaturedRooms from "../components/FeaturedRooms";
-import Button from "../components/StyledHero";
 
 const Home = () => {
   return (
@@ -22,7 +20,6 @@ const Home = () => {
       </Hero>
       <Services />
       <FeaturedRooms />
-      <Button>hello</Button>
     </>
   );
 };
